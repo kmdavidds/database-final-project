@@ -26,7 +26,7 @@ export default function Landing() {
           }}
         >
           <img src="/logo.png" alt="logo" height={200} />
-          <Typography variant="h2" sx={{ml: 4}}>
+          <Typography variant="h2" sx={{ ml: 4 }}>
             Sistem Informasi <br /> Warung Internet
           </Typography>
         </Box>
