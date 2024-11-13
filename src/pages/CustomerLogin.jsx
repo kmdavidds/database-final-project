@@ -70,7 +70,9 @@ export default function CustomerLogin() {
           }}
         >
           <Box sx={{ pb: 2 }}>
-            <Typography variant="h3">Customer Login</Typography>
+            <Typography variant="h3" sx={{ color: "primary.main" }}>
+              Customer Login
+            </Typography>
           </Box>
           <TextField
             required
@@ -107,7 +109,7 @@ export default function CustomerLogin() {
               label="Password"
             />
           </FormControl>
-          <Typography variant="overline" sx={{ mb: 3 }}>
+          <Typography variant="overline" sx={{ mb: 3, color: "primary.main" }}>
             Secure <LockIcon fontSize="inherit" />
           </Typography>
           {mutation.isPending ? (

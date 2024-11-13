@@ -25,23 +25,23 @@ export default function Landing() {
             mb: 8,
           }}
         >
-          <img src="/logo.png" alt="logo" height={200} />
-          <Typography variant="h2" sx={{ ml: 4 }}>
+          <img src="/logo5.png" alt="logo" height={200} />
+          <Typography variant="h2" sx={{ ml: 4, color: "primary.main" }}>
             Sistem Informasi <br /> Warung Internet
           </Typography>
         </Box>
         <Button
-          variant="contained"
+          variant="outlined"
           size="large"
-          sx={{ m: 4 }}
+          sx={{ mb: 4 }}
           onClick={() => navigate("/customer/login")}
         >
           Customer Login
         </Button>
         <Button
-          variant="contained"
+          variant="outlined"
           size="large"
-          sx={{ m: 4 }}
+          sx={{ mb: 4 }}
           onClick={() => navigate("/customer/register")}
         >
           Customer Register

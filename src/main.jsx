@@ -33,16 +33,24 @@ const router = createBrowserRouter([
 
 const queryClient = new QueryClient({});
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
+const theme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#efbb07',
+      },
+      secondary: {
+        light: '#e2145f',
+        main: '#481852',
+        dark: '#8d0c55',
+      },
+    },
+  });
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline>
           <RouterProvider router={router} />
         </CssBaseline>

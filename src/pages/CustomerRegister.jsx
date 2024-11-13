@@ -70,7 +70,9 @@ export default function CustomerRegister() {
           }}
         >
           <Box sx={{ pb: 2 }}>
-            <Typography variant="h3">Customer Register</Typography>
+            <Typography variant="h3" sx={{ color: "primary.main" }}>
+              Customer Register
+            </Typography>
           </Box>
           <TextField
             required
@@ -116,7 +118,7 @@ export default function CustomerRegister() {
               label="Password"
             />
           </FormControl>
-          <Typography variant="overline" sx={{ mb: 3 }}>
+          <Typography variant="overline" sx={{ mb: 3, color: "primary.main" }}>
             Secure <LockIcon fontSize="inherit" />
           </Typography>
           {mutation.isPending ? (
