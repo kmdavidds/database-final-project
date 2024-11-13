@@ -16,7 +16,7 @@ import {
 import LockIcon from "@mui/icons-material/Lock";
 import LoginIcon from "@mui/icons-material/Login";
 
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
