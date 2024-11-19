@@ -43,7 +43,7 @@ export default function CustomerLogin() {
 
   return (
     <>
-      <BackButton />
+      <BackButton to={"/"} />
       <section className="flex h-screen w-screen justify-center items-center">
         <form
           onSubmit={handleSubmit(onSubmit)}

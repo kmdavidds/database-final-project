@@ -9,11 +9,17 @@ import Landing from "./pages/Landing";
 import CustomerRegister from "./pages/CustomerRegister";
 import "./index.css";
 import axios from "axios";
+import AdminLogin from "./pages/AdminLogin";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Landing />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "/admin/login",
+    element: <AdminLogin />,
     errorElement: <ErrorBoundary />,
   },
   {

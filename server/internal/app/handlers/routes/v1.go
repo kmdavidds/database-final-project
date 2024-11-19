@@ -9,6 +9,7 @@ func Mount(api fiber.Router) {
 	v1 := api.Group("/v1")
 
 	customerRoutes(v1)
+	adminRoutes(v1)
 }
 
 func customerRoutes(v1 fiber.Router) {
@@ -16,4 +17,10 @@ func customerRoutes(v1 fiber.Router) {
 	
 	customer.Post("/register", handlers.CustomerRegister)
 	customer.Post("/login", handlers.CustomerLogin)
+}
+
+func adminRoutes(v1 fiber.Router) {
+	admin := v1.Group("/admin")
+
+	admin.Post("/login", handlers.AdminLogin)
 }
