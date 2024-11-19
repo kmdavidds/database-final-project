@@ -55,7 +55,7 @@ func CustomerLogin(req dto.LoginRequest) (*fiber.Cookie, error) {
 		return nil, err
 	}
 
-	domain := "https://siwi.komangdavid.me"
+	domain := "siwi.komangdavid.me"
 	if os.Getenv("STAGE") == "DEV" {
 		domain = "localhost"
 	}
