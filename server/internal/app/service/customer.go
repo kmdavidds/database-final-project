@@ -60,6 +60,6 @@ func CustomerLogin(req dto.LoginRequest) (*fiber.Cookie, error) {
 		Value:    tokenString,
 		Expires:  time.Now().Add(24 * time.Hour),
 		HTTPOnly: true,
-		SameSite: "lax",
+		SameSite: "Lax",
 	}, nil
 }

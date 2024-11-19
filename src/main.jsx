@@ -2,12 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import NotFound from "./pages/NotFound";
 import ErrorBoundary from "./pages/ErrorBoundary";
 import CustomerLogin from "./pages/CustomerLogin";
 import Landing from "./pages/Landing";
 import CustomerRegister from "./pages/CustomerRegister";
+import "./index.css";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -31,30 +32,14 @@ const router = createBrowserRouter([
   },
 ]);
 
-const queryClient = new QueryClient({});
+axios.defaults.withCredentials = true;
 
-const theme = createTheme({
-    palette: {
-      mode: 'dark',
-      primary: {
-        main: '#efbb07',
-      },
-      secondary: {
-        light: '#e2145f',
-        main: '#481852',
-        dark: '#8d0c55',
-      },
-    },
-  });
+const queryClient = new QueryClient({});
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline>
-          <RouterProvider router={router} />
-        </CssBaseline>
-      </ThemeProvider>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   </StrictMode>
 );

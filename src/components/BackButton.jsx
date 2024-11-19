@@ -1,20 +1,14 @@
-import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function BackButton() {
   const navigate = useNavigate();
   return (
-    <Box
-      sx={{
-        m: 4,
-        position: "absolute",
-        display: { xs: "none", md: "inline" },
-        top: 2,
-      }}
+    <a
+      role="button"
+      className={"btn btn-primary btn-md hidden md:flex absolute top-2 m-8"}  
+      onClick={() => navigate(-1)}
     >
-      <Button variant="contained" size="medium" onClick={() => navigate(-1)}>
-        Kembali
-      </Button>
-    </Box>
+      Kembali
+    </a>
   );
 }
