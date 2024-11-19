@@ -55,12 +55,17 @@ func CustomerLogin(req dto.LoginRequest) (*fiber.Cookie, error) {
 		return nil, err
 	}
 
+	domain := "https://siwi.komangdavid.me"
+	if os.Getenv("STAGE") == "DEV" {
+		domain = "localhost"
+	}
+
 	return &fiber.Cookie{
 		Name:     "Authorization",
 		Value:    tokenString,
 		Expires:  time.Now().Add(24 * time.Hour),
 		HTTPOnly: true,
 		SameSite: "Lax",
-		Domain:   "localhost",
+		Domain:   domain,
 	}, nil
 }
