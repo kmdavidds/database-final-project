@@ -26,11 +26,17 @@ func AdminLogin(req dto.LoginRequest) (*fiber.Cookie, error) {
 		return nil, err
 	}
 
+	domain := "siwi.komangdavid.me"
+	if os.Getenv("STAGE") == "DEV" {
+		domain = "localhost"
+	}
+
 	return &fiber.Cookie{
 		Name:     "Admin",
 		Value:    tokenString,
 		Expires:  time.Now().Add(24 * time.Hour),
 		HTTPOnly: true,
 		SameSite: "Lax",
+		Domain:   domain,
 	}, nil
 }

@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import apiURL from "../js/APIURL";
+import apiURL from "../../js/APIURL";
 import axios from "axios";
-import BackButton from "../components/BackButton";
+import BackButton from "../../components/BackButton";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
@@ -16,7 +16,7 @@ export default function CustomerLogin() {
     const response = await axios({
       method: "POST",
       baseURL: apiURL,
-      url: "/api/v1/customer/login",
+      url: "/api/v1/customers/login",
       data: loginDetails,
     });
     return response;
@@ -29,7 +29,7 @@ export default function CustomerLogin() {
       setTimeout(() => {
         setIsActiveSuccess(false);
         navigate("/");
-      }, 3000);
+      }, 1000);
     },
     onError: () => {
       setIsActiveError(true);

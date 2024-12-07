@@ -21,6 +21,7 @@ func NewDatabase() error {
 func MigrateTables() error {
 	err := DB.AutoMigrate(
 		&entity.Customer{},
+		&entity.Staff{},
 	)
 	return err
 }

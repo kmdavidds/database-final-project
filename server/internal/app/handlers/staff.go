@@ -8,26 +8,7 @@ import (
 	"github.com/kmdavidds/database-final-project/server/internal/pkg/dto"
 )
 
-func CustomerRegister(c *fiber.Ctx) error {
-	req := dto.CustomerRegisterRequest{}
-	err := c.BodyParser(&req)
-	if err != nil {
-		return c.Status(http.StatusUnprocessableEntity).JSON(map[string]any{
-			"error": err,
-		})
-	}
-
-	err = service.CustomerRegister(req)
-	if err != nil {
-		return c.Status(http.StatusBadRequest).JSON(map[string]any{
-			"error": err,
-		})
-	}
-
-	return c.SendStatus(http.StatusCreated)
-}
-
-func CustomerLogin(c *fiber.Ctx) error {
+func StaffLogin(c *fiber.Ctx) error {
 	req := dto.LoginRequest{}
 	err := c.BodyParser(&req)
 	if err != nil {
@@ -36,7 +17,7 @@ func CustomerLogin(c *fiber.Ctx) error {
 		})
 	}
 
-	cookie, err := service.CustomerLogin(req)
+	cookie, err := service.StaffLogin(req)
 	if err != nil {
 		return c.Status(http.StatusBadRequest).JSON(map[string]any{
 			"error": err,
@@ -48,8 +29,27 @@ func CustomerLogin(c *fiber.Ctx) error {
 	return c.SendStatus(http.StatusOK)
 }
 
-func GetAllCustomers(c *fiber.Ctx) error {
-	customers, err := service.GetAllCustomers()
+func StaffRegister(c *fiber.Ctx) error {
+	req := dto.StaffRegisterRequest{}
+	err := c.BodyParser(&req)
+	if err != nil {
+		return c.Status(http.StatusUnprocessableEntity).JSON(map[string]any{
+			"error": err,
+		})
+	}
+
+	err = service.StaffRegister(req)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(map[string]any{
+			"error": err,
+		})
+	}
+
+	return c.SendStatus(http.StatusCreated)
+}
+
+func GetAllStaffs(c *fiber.Ctx) error {
+	staffs, err := service.GetAllStaffs()
 	if err != nil {
 		return c.Status(http.StatusBadRequest).JSON(map[string]any{
 			"error": err,
@@ -57,7 +57,8 @@ func GetAllCustomers(c *fiber.Ctx) error {
 	}
 
 	return c.Status(http.StatusOK).JSON(map[string]any{
-		"customers": customers,
+		"staffs": staffs,
 	})
 }
+
 

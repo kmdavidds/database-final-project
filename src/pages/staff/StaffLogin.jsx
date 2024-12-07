@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import apiURL from "../js/APIURL";
+import apiURL from "../../js/APIURL";
 import axios from "axios";
-import BackButton from "../components/BackButton";
+import BackButton from "../../components/BackButton";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-export default function AdminLogin() {
+export default function StaffLogin() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [isActiveError, setIsActiveError] = useState(false);
@@ -16,7 +16,7 @@ export default function AdminLogin() {
     const response = await axios({
       method: "POST",
       baseURL: apiURL,
-      url: "/api/v1/admin/login",
+      url: "/api/v1/staffs/login",
       data: loginDetails,
     });
     return response;
@@ -29,7 +29,7 @@ export default function AdminLogin() {
       setTimeout(() => {
         setIsActiveSuccess(false);
         navigate("/");
-      }, 3000);
+      }, 1000);
     },
     onError: () => {
       setIsActiveError(true);
@@ -49,7 +49,7 @@ export default function AdminLogin() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col justify-center items-center"
         >
-          <p className="text-6xl mb-2">Admin</p>
+          <p className="text-6xl mb-2">Staff</p>
           <div className="divider divider-primary" />
           <div className="mb-4 mt-2">
             <label className="input input-bordered flex items-center gap-2">

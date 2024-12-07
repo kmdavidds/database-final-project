@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import apiURL from "../js/APIURL";
+import apiURL from "../../js/APIURL";
 import axios from "axios";
-import BackButton from "../components/BackButton";
+import BackButton from "../../components/BackButton";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-export default function CustomerRegister() {
+export default function AdminLogin() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [isActiveError, setIsActiveError] = useState(false);
@@ -16,7 +16,7 @@ export default function CustomerRegister() {
     const response = await axios({
       method: "POST",
       baseURL: apiURL,
-      url: "/api/v1/customer/register",
+      url: "/api/v1/admins/login",
       data: loginDetails,
     });
     return response;
@@ -28,14 +28,14 @@ export default function CustomerRegister() {
       setIsActiveSuccess(true);
       setTimeout(() => {
         setIsActiveSuccess(false);
-        navigate("/");
+        navigate("/admin/dashboard");
       }, 3000);
     },
     onError: () => {
       setIsActiveError(true);
       setTimeout(() => {
         setIsActiveError(false);
-      }, 3000);
+      }, 1000);
     },
   });
 
@@ -43,65 +43,15 @@ export default function CustomerRegister() {
 
   return (
     <>
-      <BackButton to={"/customer/login"} />
+      <BackButton to={"/"} />
       <section className="flex h-screen w-screen justify-center items-center">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col justify-center items-center"
         >
-          <p className="text-6xl mb-2">Register</p>
+          <p className="text-6xl mb-2">Admin</p>
           <div className="divider divider-primary" />
-          <div className="mb-4">
-            <label className="input input-bordered flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                />
-              </svg>
-
-              <input
-                {...register("name")}
-                type="text"
-                className="grow"
-                placeholder="Nama Lengkap"
-              />
-            </label>
-          </div>
-          <div className="mb-4">
-            <label className="input input-bordered flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                strokWidth="1.5"
-                stroke="currentColor"
-                className="size-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
-                />
-              </svg>
-
-              <input
-                {...register("phone")}
-                type="text"
-                className="grow"
-                placeholder="Nomor Telepon"
-              />
-            </label>
-          </div>
-          <div className="mb-4">
+          <div className="mb-4 mt-2">
             <label className="input input-bordered flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +96,7 @@ export default function CustomerRegister() {
             <button
               className={mutation.isPending ? "hidden" : "btn btn-primary"}
             >
-              Register
+              Login
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -170,17 +120,6 @@ export default function CustomerRegister() {
               }
             ></span>
           </div>
-          <div>
-            <p>
-              Sudah punya akun?{" "}
-              <a
-                className="link text-secondary"
-                onClick={() => navigate("/customer/login")}
-              >
-                Login
-              </a>
-            </p>
-          </div>
         </form>
       </section>
 
@@ -202,7 +141,7 @@ export default function CustomerRegister() {
               d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <span>Register berhasil!</span>
+          <span>Login berhasil!</span>
         </div>
         <div
           role="alert"
@@ -221,7 +160,7 @@ export default function CustomerRegister() {
               d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <span>Email atau password salah. Register gagal!</span>
+          <span>Email atau password salah. Login gagal!</span>
         </div>
       </section>
     </>

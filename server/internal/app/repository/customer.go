@@ -32,3 +32,14 @@ func GetCustomer(email string) (entity.Customer, error) {
 	return customer, err
 }
 
+func GetAllCustomers() ([]entity.Customer, error) {
+	var customers []entity.Customer
+
+	err := config.DB.Raw(
+		`SELECT *
+		FROM customers;`,
+
+	).Scan(&customers).Error
+
+	return customers, err
+}

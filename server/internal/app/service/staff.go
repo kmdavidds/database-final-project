@@ -12,20 +12,20 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func CustomerRegister(req dto.CustomerRegisterRequest) error {
+func StaffRegister(req dto.StaffRegisterRequest) error {
 	passwordByte, err := bcrypt.GenerateFromPassword([]byte(req.Password), 10)
 	if err != nil {
 		return err
 	}
 
-	customer := entity.Customer{
+	staff := entity.Staff{
 		Email:    req.Email,
 		Password: string(passwordByte),
 		Name:     req.Name,
 		Phone:    req.Phone,
 	}
 
-	err = repository.CreateCustomer(customer)
+	err = repository.CreateStaff(staff)
 	if err != nil {
 		return err
 	}
@@ -33,13 +33,13 @@ func CustomerRegister(req dto.CustomerRegisterRequest) error {
 	return nil
 }
 
-func CustomerLogin(req dto.LoginRequest) (*fiber.Cookie, error) {
-	customer, err := repository.GetCustomer(req.Email)
+func StaffLogin(req dto.LoginRequest) (*fiber.Cookie, error) {
+	staff, err := repository.GetStaff(req.Email)
 	if err != nil {
 		return nil, err
 	}
 
-	err = bcrypt.CompareHashAndPassword([]byte(customer.Password), []byte(req.Password))
+	err = bcrypt.CompareHashAndPassword([]byte(staff.Password), []byte(req.Password))
 	if err != nil {
 		return nil, err
 	}
@@ -70,6 +70,6 @@ func CustomerLogin(req dto.LoginRequest) (*fiber.Cookie, error) {
 	}, nil
 }
 
-func GetAllCustomers() ([]entity.Customer, error) {
-	return repository.GetAllCustomers()
+func GetAllStaffs() ([]entity.Staff, error) {
+	return repository.GetAllStaffs()
 }
