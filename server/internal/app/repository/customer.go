@@ -37,7 +37,8 @@ func GetAllCustomers() ([]entity.Customer, error) {
 
 	err := config.DB.Raw(
 		`SELECT *
-		FROM customers;`,
+		FROM customers
+		ORDER BY customer_id ASC;`,
 
 	).Scan(&customers).Error
 

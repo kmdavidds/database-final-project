@@ -22,6 +22,11 @@ func MigrateTables() error {
 	err := DB.AutoMigrate(
 		&entity.Customer{},
 		&entity.Staff{},
+		&entity.Item{},
+		&entity.Computer{},
+		&entity.Order{},
+		&entity.Reservation{},
+		&entity.Session{},
 	)
 	return err
 }

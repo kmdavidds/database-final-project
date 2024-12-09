@@ -12,31 +12,33 @@ import PasswordIcon from "../../components/svg/PasswordIcon";
 import EnterIcon from "../../components/svg/EnterIcon";
 import SideBar from "../../components/SideBar";
 import DashboardLogo from "../../components/DashboardLogo";
+import TimePicker from "rc-time-picker";
+import SideBarStaff from "../../components/SideBarStaff";
 
-export default function StaffAdd() {
+export default function ReservationAddStaff() {
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm();
   const [isActiveError, setIsActiveError] = useState(false);
   const [isActiveSuccess, setIsActiveSuccess] = useState(false);
 
-  const postLogin = async (loginDetails) => {
+  const postReservation = async (reservationDetails) => {
     const response = await axios({
       method: "POST",
       baseURL: apiURL,
-      url: "/api/v1/staffs/register",
-      data: loginDetails,
+      url: "/api/v1/reservations",
+      data: reservationDetails,
     });
     return response;
   };
 
   const mutation = useMutation({
-    mutationFn: postLogin,
+    mutationFn: postReservation,
     onSuccess: () => {
       setIsActiveSuccess(true);
       setTimeout(() => {
         setIsActiveSuccess(false);
-        navigate("/admin/dashboard/staffs");
+        navigate("/admin/dashboard/reservations");
       }, 1000);
     },
     onError: () => {
@@ -47,16 +49,20 @@ export default function StaffAdd() {
     },
   });
 
+  function onChange(value) {
+    console.log(value && value.format(str));
+  }
+
   const onSubmit = (data) => mutation.mutate(data);
   return (
     <div className="grid grid-cols-5 h-screen">
       <div className="col-span-1 bg-primary-content">
         {/* Left section (1/5 of the screen) */}
         <div className="flex flex-col justify-center items-center">
-        <DashboardLogo title={"Admin SIWI"}/>
+          <DashboardLogo title={"Staff SIWI"} />
           <ul className="menu bg-base-200 text-base-content min-h-full w-full p-4">
             {/* Sidebar content here */}
-            <SideBar />
+            <SideBarStaff />
           </ul>
         </div>
       </div>
@@ -69,49 +75,43 @@ export default function StaffAdd() {
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col justify-center items-center"
               >
-                <p className="text-6xl mb-2">Tambah Staff</p>
+                <p className="text-6xl mb-2">Tambah Reservation</p>
                 <div className="divider divider-primary" />
                 <div className="mb-4">
-                  <label className="input input-bordered flex items-center gap-2">
-                    <NameIcon />
+                  <label className="input input-bordered flex items-center gap-2 mb-4">
+                    <EnterIcon />
                     <input
                       {...register("name")}
                       type="text"
                       className="grow"
-                      placeholder="Nama Lengkap"
+                      placeholder="Nama Komputer"
                     />
                   </label>
-                </div>
-                <div className="mb-4">
-                  <label className="input input-bordered flex items-center gap-2">
-                    <PhoneIcon />
+                  <label className="input input-bordered flex items-center gap-2 mb-4">
+                    <EnterIcon />
                     <input
-                      {...register("phone")}
+                      {...register("name")}
                       type="text"
                       className="grow"
-                      placeholder="Nomor Telepon"
+                      placeholder="Email Customer"
                     />
                   </label>
-                </div>
-                <div className="mb-4">
-                  <label className="input input-bordered flex items-center gap-2">
-                    <EmailIcon />
+                  <label className="input input-bordered flex items-center gap-2 mb-4">
+                    <EnterIcon />
                     <input
-                      {...register("email")}
+                      {...register("name")}
                       type="text"
                       className="grow"
-                      placeholder="Email"
+                      placeholder="Waktu Mulai"
                     />
                   </label>
-                </div>
-                <div className="mb-8">
-                  <label className="input input-bordered flex items-center gap-2">
-                    <PasswordIcon />
+                  <label className="input input-bordered flex items-center gap-2 mb-4">
+                    <EnterIcon />
                     <input
-                      {...register("password")}
-                      type="password"
+                      {...register("name")}
+                      type="text"
                       className="grow"
-                      placeholder="Password"
+                      placeholder="Waktu Akhir"
                     />
                   </label>
                 </div>

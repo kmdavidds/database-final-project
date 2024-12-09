@@ -61,7 +61,7 @@ func CustomerLogin(req dto.LoginRequest) (*fiber.Cookie, error) {
 	}
 
 	return &fiber.Cookie{
-		Name:     "Authorization",
+		Name:     "Customer",
 		Value:    tokenString,
 		Expires:  time.Now().Add(24 * time.Hour),
 		HTTPOnly: true,

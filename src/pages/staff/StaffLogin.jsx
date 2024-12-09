@@ -28,7 +28,7 @@ export default function StaffLogin() {
       setIsActiveSuccess(true);
       setTimeout(() => {
         setIsActiveSuccess(false);
-        navigate("/");
+        navigate("/staff/dashboard");
       }, 1000);
     },
     onError: () => {

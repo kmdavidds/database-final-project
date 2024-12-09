@@ -6,28 +6,30 @@ import apiURL from "../../js/APIURL";
 import Loading from "../../components/Loading";
 import SideBar from "../../components/SideBar";
 import DashboardLogo from "../../components/DashboardLogo";
+import formatRupiah from "../../js/formatRP";
+import formatDate from "../../js/formatDate";
 
-export default function CustomerManagement() {
+export default function OrderManagement() {
   const navigate = useNavigate();
 
-  const getCustomers = async () => {
-    const response = await axios.get(`${apiURL}/api/v1/customers`);
+  const getOrders = async () => {
+    const response = await axios.get(`${apiURL}/api/v1/orders`);
     return response.data;
   };
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["customers"],
-    queryFn: getCustomers,
+    queryKey: ["orders"],
+    queryFn: getOrders,
   });
 
-  const handleDelete = (customerID) => {
+  const handleDelete = (orderID) => {
     // Placeholder for delete functionality
-    console.log(`Deleting employee with customerID: ${customerID}`);
+    console.log(`Deleting employee with orderID: ${orderID}`);
   };
 
-  const handleEdit = (customerID) => {
+  const handleEdit = (orderID) => {
     // Placeholder for edit functionality
-    console.log(`Editing employee with customerID: ${customerID}`);
+    console.log(`Editing employee with orderID: ${orderID}`);
   };
 
   if (isLoading) {
@@ -38,7 +40,7 @@ export default function CustomerManagement() {
     console.log(error);
   }
 
-  const customers = data.customers;
+  const orders = data.orders;
 
   return (
     <div className="grid grid-cols-5 h-screen">
@@ -61,46 +63,33 @@ export default function CustomerManagement() {
               {/* Left Top: Title */}
               <div className="flex items-center justify-start p-4">
                 <h1 className="text-5xl font-bold text-base-content ml-12">
-                  Customer Manajemen
+                  Order Manajemen
                 </h1>
               </div>
             </div>
 
-            {/* Bottom Section: Customer Table */}
+            {/* Bottom Section: Order Table */}
             <div className="row-span-3 p-6 bg-base-100 overflow-x-auto">
               <table className="table table-zebra">
                 <thead>
                   <tr>
-                    <th>Customer ID</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Nomor Telepon</th>
-                    <th></th>
+                    <th>Order ID</th>
+                    <th>Customer Email</th>
+                    <th>Item ID</th>
+                    <th>Jumlah</th>
+                    <th>Waktu Order</th>
+                    <th>Total Harga</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {customers.map((customer) => (
-                    <tr key={customer.customerID}>
-                      <td>{customer.customerID}</td>
-                      <td>{customer.name}</td>
-                      <td>{customer.email}</td>
-                      <td>{customer.phone}</td>
-                      <td>
-                        <div className="flex space-x-2">
-                          <button
-                            className="btn btn-sm btn-outline btn-info"
-                            onClick={() => handleEdit(customer.customerID)}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="btn btn-sm btn-outline btn-error"
-                            onClick={() => handleDelete(customer.customerID)}
-                          >
-                            Hapus
-                          </button>
-                        </div>
-                      </td>
+                  {orders.map((order) => (
+                    <tr key={order.orderID}>
+                      <td>{order.orderID}</td>
+                      <td>{order.customerEmail}</td>
+                      <td>{order.itemID}</td>
+                      <td>{order.quantity}</td>
+                      <td>{formatDate(order.orderTime)}</td>
+                      <td>{formatRupiah(order.totalAmount)}</td>
                     </tr>
                   ))}
                 </tbody>

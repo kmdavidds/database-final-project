@@ -29,13 +29,13 @@ export default function AdminLogin() {
       setTimeout(() => {
         setIsActiveSuccess(false);
         navigate("/admin/dashboard");
-      }, 3000);
+      }, 1000);
     },
     onError: () => {
       setIsActiveError(true);
       setTimeout(() => {
         setIsActiveError(false);
-      }, 1000);
+      }, 3000);
     },
   });
 

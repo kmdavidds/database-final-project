@@ -28,7 +28,7 @@ export default function CustomerLogin() {
       setIsActiveSuccess(true);
       setTimeout(() => {
         setIsActiveSuccess(false);
-        navigate("/");
+        navigate("/customer/dashboard");
       }, 1000);
     },
     onError: () => {

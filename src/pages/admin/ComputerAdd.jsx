@@ -13,7 +13,7 @@ import EnterIcon from "../../components/svg/EnterIcon";
 import SideBar from "../../components/SideBar";
 import DashboardLogo from "../../components/DashboardLogo";
 
-export default function StaffAdd() {
+export default function ComputerAdd() {
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm();
@@ -24,7 +24,7 @@ export default function StaffAdd() {
     const response = await axios({
       method: "POST",
       baseURL: apiURL,
-      url: "/api/v1/staffs/register",
+      url: "/api/v1/computers/register",
       data: loginDetails,
     });
     return response;
@@ -36,7 +36,7 @@ export default function StaffAdd() {
       setIsActiveSuccess(true);
       setTimeout(() => {
         setIsActiveSuccess(false);
-        navigate("/admin/dashboard/staffs");
+        navigate("/admin/dashboard/computers");
       }, 1000);
     },
     onError: () => {
@@ -53,7 +53,7 @@ export default function StaffAdd() {
       <div className="col-span-1 bg-primary-content">
         {/* Left section (1/5 of the screen) */}
         <div className="flex flex-col justify-center items-center">
-        <DashboardLogo title={"Admin SIWI"}/>
+          <DashboardLogo title={"Admin SIWI"}/>
           <ul className="menu bg-base-200 text-base-content min-h-full w-full p-4">
             {/* Sidebar content here */}
             <SideBar />
@@ -69,49 +69,16 @@ export default function StaffAdd() {
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col justify-center items-center"
               >
-                <p className="text-6xl mb-2">Tambah Staff</p>
+                <p className="text-6xl mb-2">Tambah Computer</p>
                 <div className="divider divider-primary" />
                 <div className="mb-4">
                   <label className="input input-bordered flex items-center gap-2">
-                    <NameIcon />
+                    <EnterIcon />
                     <input
                       {...register("name")}
                       type="text"
                       className="grow"
-                      placeholder="Nama Lengkap"
-                    />
-                  </label>
-                </div>
-                <div className="mb-4">
-                  <label className="input input-bordered flex items-center gap-2">
-                    <PhoneIcon />
-                    <input
-                      {...register("phone")}
-                      type="text"
-                      className="grow"
-                      placeholder="Nomor Telepon"
-                    />
-                  </label>
-                </div>
-                <div className="mb-4">
-                  <label className="input input-bordered flex items-center gap-2">
-                    <EmailIcon />
-                    <input
-                      {...register("email")}
-                      type="text"
-                      className="grow"
-                      placeholder="Email"
-                    />
-                  </label>
-                </div>
-                <div className="mb-8">
-                  <label className="input input-bordered flex items-center gap-2">
-                    <PasswordIcon />
-                    <input
-                      {...register("password")}
-                      type="password"
-                      className="grow"
-                      placeholder="Password"
+                      placeholder="Nama Komputer"
                     />
                   </label>
                 </div>

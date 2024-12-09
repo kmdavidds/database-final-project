@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import apiURL from "../../js/APIURL";
 import axios from "axios";
-import BackButton from "../../components/BackButton";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import NameIcon from "../../components/svg/NameIcon";
@@ -13,7 +12,7 @@ import EnterIcon from "../../components/svg/EnterIcon";
 import SideBar from "../../components/SideBar";
 import DashboardLogo from "../../components/DashboardLogo";
 
-export default function StaffAdd() {
+export default function ItemAdd() {
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm();
@@ -24,7 +23,7 @@ export default function StaffAdd() {
     const response = await axios({
       method: "POST",
       baseURL: apiURL,
-      url: "/api/v1/staffs/register",
+      url: "/api/v1/items/register",
       data: loginDetails,
     });
     return response;
@@ -36,7 +35,7 @@ export default function StaffAdd() {
       setIsActiveSuccess(true);
       setTimeout(() => {
         setIsActiveSuccess(false);
-        navigate("/admin/dashboard/staffs");
+        navigate("/admin/dashboard/items");
       }, 1000);
     },
     onError: () => {
@@ -47,7 +46,12 @@ export default function StaffAdd() {
     },
   });
 
-  const onSubmit = (data) => mutation.mutate(data);
+  const onSubmit = (data) => mutation.mutate({
+    name: data.name,
+    category: data.category,
+    price: parseFloat(data.price),
+    stockLevel: parseInt(data.stockLevel),
+  });
   return (
     <div className="grid grid-cols-5 h-screen">
       <div className="col-span-1 bg-primary-content">
@@ -69,52 +73,53 @@ export default function StaffAdd() {
                 onSubmit={handleSubmit(onSubmit)}
                 className="flex flex-col justify-center items-center"
               >
-                <p className="text-6xl mb-2">Tambah Staff</p>
+                <p className="text-6xl mb-2">Tambah Produk</p>
                 <div className="divider divider-primary" />
                 <div className="mb-4">
                   <label className="input input-bordered flex items-center gap-2">
-                    <NameIcon />
+                    <EnterIcon />
                     <input
-                      {...register("name")}
+                      {...register("itemName")}
                       type="text"
                       className="grow"
-                      placeholder="Nama Lengkap"
+                      placeholder="Nama Produk"
                     />
                   </label>
                 </div>
                 <div className="mb-4">
                   <label className="input input-bordered flex items-center gap-2">
-                    <PhoneIcon />
+                    <EnterIcon />
                     <input
-                      {...register("phone")}
+                      {...register("category")}
                       type="text"
                       className="grow"
-                      placeholder="Nomor Telepon"
+                      placeholder="Kategori"
                     />
                   </label>
                 </div>
                 <div className="mb-4">
                   <label className="input input-bordered flex items-center gap-2">
-                    <EmailIcon />
+                    <EnterIcon />
                     <input
-                      {...register("email")}
-                      type="text"
+                      {...register("price")}
+                      type="number"
                       className="grow"
-                      placeholder="Email"
+                      placeholder="Harga"
                     />
                   </label>
                 </div>
-                <div className="mb-8">
+                <div className="mb-4">
                   <label className="input input-bordered flex items-center gap-2">
-                    <PasswordIcon />
+                    <EnterIcon />
                     <input
-                      {...register("password")}
-                      type="password"
+                      {...register("stockLevel")}
+                      type="number"
                       className="grow"
-                      placeholder="Password"
+                      placeholder="Stok"
                     />
                   </label>
                 </div>
+              
                 <div className="mb-8">
                   <button
                     className={

@@ -35,7 +35,8 @@ func GetAllStaffs() ([]entity.Staff, error) {
 
 	err := config.DB.Raw(
 		`SELECT *
-		FROM staffs`,
+		FROM staffs
+		ORDER BY staff_id ASC`,
 	).Scan(&staffs).Error
 
 	return staffs, err
